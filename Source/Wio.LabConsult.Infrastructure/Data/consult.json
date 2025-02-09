@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Alergia e Imunologia",
+    "price": 299.99,
+    "description": "A Alergia e Imunologia é a especialidade médica dedicada ao diagnóstico, tratamento e prevenção de doenças alérgicas e distúrbios do sistema imunológico.",
+    "rating": 5,
+    "employee": "Dra. Déborah Batista de Santanna",
+    "crm": "CRM CE-19491",
+    "availability": 7,
+    "categoryId": 1
+  },
+  {
+    "name": "Clínica Geral",
+    "price": 4500.99,
+    "description": "A Clínica Geral é a especialidade médica voltada para a prevenção, diagnóstico e tratamento de diversas doenças em adultos.",
+    "rating": 5,
+    "employee": "Dr. Suitberto Sobreira Tavares Junior",
+    "crm": "CRM CE-7153",
+    "availability": 7,
+    "categoryId": 1
+  },
+  {
+    "name": "Avaliação Odontológica",
+    "price": 120.99,
+    "description": "Este Acer TravelMate P2 TMP214-53 es un equipo para productividad y uso multimedia, con una pantalla de 14 pulgadas Full HD, aunque no es especialmente ligero",
+    "rating": 5,
+    "employee": "Dr. Rafael Rodrigo Leite Martins",
+    "crm": "CRO CE-7527",
+    "availability": 5,
+    "categoryId": 2
+  },
+  {
+    "name": "Cardiologia",
+    "price": 199.99,
+    "description": "A Cardiologia é a especialidade médica responsável pelo diagnóstico, tratamento e prevenção de doenças do coração e do sistema cardiovascular. O cardiologista avalia condições como hipertensão, arritmias, insuficiência cardíaca e doenças coronarianas, além de orientar sobre hábitos saudáveis para a saúde do coração.",
+    "rating": 5,
+    "employee": "Dr. Elmar Lopes de Carvalho",
+    "crm": "CRM CE-27097",
+    "availability": 3,
+    "categoryId": 1
+  },
+  {
+    "name": "Fonoaudiologia",
+    "price": 199.99,
+    "description": "A Fonoaudiologia é a área da saúde dedicada à prevenção, avaliação, diagnóstico e tratamento de distúrbios da comunicação, voz, audição, fala e deglutição.",
+    "rating": 4,
+    "employee": "Dra. Vania Garces de Moura",
+    "crm": "CRFA CE-10898",
+    "availability": 8,
+    "categoryId": 1
+  }
+]
