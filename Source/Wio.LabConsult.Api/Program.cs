@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Wio.LabConsult.Application;
 using Wio.LabConsult.Domain.Users;
 using Wio.LabConsult.Infrastructure;
 using Wio.LabConsult.Infrastructure.Persistence;
@@ -15,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddDbContext<LabConsultDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"),

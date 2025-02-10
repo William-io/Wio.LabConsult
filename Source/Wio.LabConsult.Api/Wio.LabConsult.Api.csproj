@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Wio.LabConsult.Infrastructure\Wio.LabConsult.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
