@@ -19,7 +19,7 @@ public class Consult : Entity
     public ConsultStatus Status { get; set; } = ConsultStatus.Active;
     public int Rating { get; set; }
     public int CategoryId { get; set; }
-    public int Availability { get; set; } //stock
+    public int Availability { get; set; }
     public string? Crm { get; set; }
     public Category? Category { get; set; }
     public virtual ICollection<Review>? Reviews { get; set; }

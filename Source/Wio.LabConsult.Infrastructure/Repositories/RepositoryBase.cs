@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Wio.LabConsult.Application.Persistence;
+using Wio.LabConsult.Application.Specifications;
+using Wio.LabConsult.Infrastructure.Specifications;
 
 namespace Wio.LabConsult.Infrastructure.Repositories;
 
@@ -116,5 +118,25 @@ public class RepositoryBase<T> : IAsyncRepository<T> where T : class
     {
         _dbContext.Set<T>().Attach(entity);
         _dbContext.Entry(entity).State = EntityState.Modified;
+    }
+
+    public async Task<int> CountAsync(ISpecification<T> specification)
+    {
+        return await ApplySpecification(specification).CountAsync();
+    }
+
+    public async Task<IReadOnlyList<T>> GetAllWithSpec(ISpecification<T> specification)
+    {
+        return await ApplySpecification(specification).ToListAsync();
+    }
+
+    public Task<T> GetByIdWithSpec(ISpecification<T> specification)
+    {
+        return ApplySpecification(specification).FirstOrDefaultAsync()!;
+    }
+
+    public IQueryable<T> ApplySpecification(ISpecification<T> spec)
+    {
+        return SpecificationEvaluator<T>.GetQuery(_dbContext.Set<T>().AsQueryable(), spec);
     }
 }

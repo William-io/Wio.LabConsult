@@ -1,15 +1,20 @@
-using Microsoft.AspNetCore.Authentication;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 using Wio.LabConsult.Application;
+using Wio.LabConsult.Application.Contracts.Services;
+using Wio.LabConsult.Application.Features.Consults.Queries.GetConsultList;
 using Wio.LabConsult.Domain.Users;
 using Wio.LabConsult.Infrastructure;
+using Wio.LabConsult.Infrastructure.ImageCloudinary;
 using Wio.LabConsult.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +29,9 @@ builder.Services.AddDbContext<LabConsultDbContext>(options =>
     .EnableSensitiveDataLogging()
     .LogTo(Console.WriteLine, LogLevel.Information));
 
+builder.Services.AddMediatR(typeof(GetConsultListQueryHandler).Assembly);
+builder.Services.AddScoped<IManageImageService, ManageImageService>();
+
 builder.Services.AddControllers(opt =>
 {
     var policy = new AuthorizationPolicyBuilder()
@@ -31,7 +39,7 @@ builder.Services.AddControllers(opt =>
         .Build();
 
     opt.Filters.Add(new AuthorizeFilter(policy));
-});
+}).AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<User>();
 
@@ -40,8 +48,8 @@ identityBuilder.AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<User, Ident
 identityBuilder.AddEntityFrameworkStores<LabConsultDbContext>();
 identityBuilder.AddSignInManager<SignInManager<User>>();
 
-builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
-//builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
+//builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
+builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]!));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
