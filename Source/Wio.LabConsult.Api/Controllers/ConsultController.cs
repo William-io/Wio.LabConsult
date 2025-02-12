@@ -29,8 +29,7 @@ public class ConsultController : ControllerBase
     public async Task<ActionResult<IReadOnlyList<ConsultVm>>> GetConsultList()
     {
         var query = new GetConsultListQuery();
-        var consults = await _mediator.Send(query); //Enviar um objeto de consulta para o manipulador
-        //Handler processa a consulta e retorna o resultado
+        var consults = await _mediator.Send(query);  
         return Ok(consults);
     }
 
