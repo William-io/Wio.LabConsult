@@ -287,15 +287,12 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Crm")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(4000)");
 
                     b.Property<string>("Employee")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(100)");
 
                     b.Property<string>("LastModifiedBy")
@@ -305,7 +302,6 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(100)");
 
                     b.Property<decimal>("Price")
@@ -498,12 +494,15 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Wio.LabConsult.Domain.Shared.Country", b =>

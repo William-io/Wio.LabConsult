@@ -21,7 +21,7 @@ public class LabConsultDbContext : IdentityDbContext<User>
 
     public DbSet<Image> Images { get; set; }
     public DbSet<Country> Countries { get; set; }
-    public DbSet<Address> Address { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AppointmentItem> AppointmentsItems { get; set; }

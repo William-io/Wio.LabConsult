@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Wio.LabConsult.Application.Features.Consults.Queries.GetConsultById;
 using Wio.LabConsult.Application.Features.Consults.Queries.GetConsultList;
 using Wio.LabConsult.Application.Features.Consults.Queries.PaginationConsults;
 using Wio.LabConsult.Application.Features.Consults.Queries.VMs;
@@ -42,5 +43,14 @@ public class ConsultController : ControllerBase
         paginationConsultsQuery.Status = ConsultStatus.Active;
         var paginationConsult = await _mediator.Send(paginationConsultsQuery);
         return Ok(paginationConsult);
+    }
+
+    [AllowAnonymous]
+    [HttpGet("{id}", Name = "GetConsultById")]
+    [ProducesResponseType(typeof(ConsultVm), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ConsultVm>> GetConsultById(int id)
+    {
+        var query = new GetConsultByIdQuery(id);
+        return Ok(await _mediator.Send(query));
     }
 }

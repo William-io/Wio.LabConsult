@@ -12,7 +12,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -22,6 +22,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -29,7 +30,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -296,15 +297,15 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "NVARCHAR(100)", nullable: false),
-                    Description = table.Column<string>(type: "NVARCHAR(4000)", nullable: false),
+                    Name = table.Column<string>(type: "NVARCHAR(100)", nullable: true),
+                    Description = table.Column<string>(type: "NVARCHAR(4000)", nullable: true),
                     Price = table.Column<decimal>(type: "DECIMAL(10,2)", nullable: false),
-                    Employee = table.Column<string>(type: "NVARCHAR(100)", nullable: false),
+                    Employee = table.Column<string>(type: "NVARCHAR(100)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Availability = table.Column<int>(type: "int", nullable: false),
-                    Crm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Crm = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -507,7 +508,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "AppointmentsItems");

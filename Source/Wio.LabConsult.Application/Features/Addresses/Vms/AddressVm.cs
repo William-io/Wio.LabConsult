@@ -1,8 +1,6 @@
-﻿using Wio.LabConsult.Domain.Abstractions;
+﻿namespace Wio.LabConsult.Application.Features.Addresses.Vms;
 
-namespace Wio.LabConsult.Domain.Shared;
-
-public sealed class Address : Entity
+public class AddressVm
 {
     public string? Country { get; set; }
     public string? State { get; set; }

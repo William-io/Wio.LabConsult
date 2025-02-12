@@ -9,14 +9,14 @@ namespace Wio.LabConsult.Infrastructure.ImageCloudinary;
 
 public class ManageImageService : IManageImageService
 {
-    public CloudinarySettings _cloudinarySettings;
+    public CloudinarySettings _cloudinarySettings { get; }
 
     public ManageImageService(IOptions<CloudinarySettings> cloudinarySettings)
     {
         _cloudinarySettings = cloudinarySettings.Value;
     }
 
-    public async Task<ImageResponse> UploadImage(ImageData imageData)
+    public async Task<ImageResponse> UploadImage(ImageData imageStream)
     {
         //Implemente o codigo para upload de imagem no Cloudinary
         var account = new Account(
@@ -27,17 +27,12 @@ public class ManageImageService : IManageImageService
 
         var cloudinary = new Cloudinary(account);
 
-        if (imageData.ImageStream == null || string.IsNullOrEmpty(imageData.Name))
+        var uploadImage = new ImageUploadParams()
         {
-            throw new ArgumentException("Dados de imagem inválidos");
-        }
-
-        var uploadParams = new ImageUploadParams()
-        {
-            File = new FileDescription(imageData.Name, imageData.ImageStream)
+            File = new FileDescription(imageStream.Name, imageStream.ImageStream)
         };
 
-        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+        var uploadResult = await cloudinary.UploadAsync(uploadImage);
 
         if(uploadResult.StatusCode == HttpStatusCode.OK)
         {
