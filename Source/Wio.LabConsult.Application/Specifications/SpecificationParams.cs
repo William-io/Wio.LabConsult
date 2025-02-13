@@ -12,7 +12,6 @@ public abstract class SpecificationParams
     public int PageSize
     {
         get => _pageSize;
-        //SE O VALOR DE PÁGINA FOR MAIOR QUE O MÁXIMO, O VALOR DE PÁGINA SERÁ O MÁXIMO QUE E 50
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
     }
 

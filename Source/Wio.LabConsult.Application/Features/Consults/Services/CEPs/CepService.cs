@@ -23,7 +23,6 @@ public class CepService
 
         var addressData = JsonSerializer.Deserialize<AddressData>(response, options);
 
-
         if (addressData != null && string.IsNullOrEmpty(addressData.Erro))
             return addressData;
 
