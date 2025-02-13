@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Wio.LabConsult.Application.Contracts.Services;
+using Wio.LabConsult.Application.Features.Auth.Roles.Queries.GetRoles;
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.LoginUser;
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.RegisterUser;
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.ResetPassword;
@@ -10,7 +11,12 @@ using Wio.LabConsult.Application.Features.Auth.Users.Commands.ResetPasswordByTok
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.SendPassword;
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.UpdateAdminUser;
 using Wio.LabConsult.Application.Features.Auth.Users.Commands.UpdateUser;
+using Wio.LabConsult.Application.Features.Auth.Users.Queries.GetUserById;
+using Wio.LabConsult.Application.Features.Auth.Users.Queries.GetUserByToken;
+using Wio.LabConsult.Application.Features.Auth.Users.Queries.GetUserByUserName;
+using Wio.LabConsult.Application.Features.Auth.Users.Queries.PaginationUsers;
 using Wio.LabConsult.Application.Features.Auth.Users.VMs;
+using Wio.LabConsult.Application.Features.Shared.Queries;
 using Wio.LabConsult.Application.Models.ImageManagement;
 using Wio.LabConsult.Domain.Users;
 using Role = Wio.LabConsult.Application.Models.Authorization.Role;
@@ -119,4 +125,52 @@ public class UserController : ControllerBase
     {
         return await _mediator.Send(request);
     }
+
+    [Authorize(Roles = Role.ADMIN)]
+    [HttpGet("{id}", Name = "GetUserById")]
+    [ProducesResponseType(typeof(AuthResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<AuthResponse>> GetUserById(string id)
+    {
+        var query = new GetUserByIdQuery(id);
+        return await _mediator.Send(query);
+    }
+
+    [HttpGet("", Name = "CurrentUser")]
+    [ProducesResponseType(typeof(AuthResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<AuthResponse>> CurrentUser()
+    {
+        var query = new GetUserByTokenQuery();
+        return await _mediator.Send(query);
+    }
+
+    [Authorize(Roles = Role.ADMIN)]
+    [HttpGet("username/{username}", Name = "GetUserByUserName")]
+    [ProducesResponseType(typeof(AuthResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<AuthResponse>> GetUserByUserName(string username)
+    {
+        var query = new GetUserByUserNameQuery(username);
+        return await _mediator.Send(query);
+    }
+
+    [Authorize(Roles = Role.ADMIN)]
+    [HttpGet("paginationAdmin", Name = "PaginationUser")]
+    [ProducesResponseType(typeof(PaginationVm<User>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<PaginationVm<User>>> PaginationUser(
+                   [FromQuery] PaginationUsersQuery paginationUsersQuery
+               )
+    {
+        var paginationUser = await _mediator.Send(paginationUsersQuery);
+        return Ok(paginationUser);
+    }
+
+    [AllowAnonymous]
+    [HttpGet("roles", Name = "GetRolesList")]
+    [ProducesResponseType(typeof(List<string>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<List<string>>> GetRolesList()
+    {
+        var query = new GetRolesQuery();
+        return Ok(await _mediator.Send(query));
+
+    }
+
 }

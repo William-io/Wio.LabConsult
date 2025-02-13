@@ -42,8 +42,4 @@
 	<PackageReference Include="Stripe.net" Version="41.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Auth\Roles\" />
-  </ItemGroup>
-
 </Project>
