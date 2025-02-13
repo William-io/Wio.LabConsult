@@ -19,5 +19,7 @@ public class ConsultConfiguration : IEntityTypeConfiguration<Consult>
             .HasForeignKey(x => x.ConsultId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.OwnsOne(a => a.Address);
     }
 }

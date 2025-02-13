@@ -22,4 +22,6 @@ public class CreateConsultCommand : IRequest<ConsultVm>
     public IReadOnlyList<IFormFile>? Photos { get; set; }
 
     public IReadOnlyList<CreateConsultImageCommand>? ImageUrls { get; set; }
+
+    public string? Local { get; set; }
 }

@@ -602,7 +602,6 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -612,7 +611,6 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -727,6 +725,37 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.OwnsOne("Wio.LabConsult.Domain.Consults.ClinicAddress", "Address", b1 =>
+                        {
+                            b1.Property<int>("ConsultId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Bairro")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Localidade")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Logradouro")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Uf")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ConsultId");
+
+                            b1.ToTable("Consults");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ConsultId");
+                        });
+
+                    b.Navigation("Address");
 
                     b.Navigation("Category");
                 });

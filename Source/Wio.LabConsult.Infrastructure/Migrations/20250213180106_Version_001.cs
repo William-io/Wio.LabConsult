@@ -69,8 +69,8 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -306,6 +306,10 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Availability = table.Column<int>(type: "int", nullable: false),
                     Crm = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLogradouro = table.Column<string>(name: "Address_Logradouro", type: "nvarchar(max)", nullable: true),
+                    AddressBairro = table.Column<string>(name: "Address_Bairro", type: "nvarchar(max)", nullable: true),
+                    AddressLocalidade = table.Column<string>(name: "Address_Localidade", type: "nvarchar(max)", nullable: true),
+                    AddressUf = table.Column<string>(name: "Address_Uf", type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),

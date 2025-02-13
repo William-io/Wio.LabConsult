@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wio.LabConsult.Application.Behaviors;
 using Wio.LabConsult.Application.Extensions;
+using Wio.LabConsult.Application.Features.Consults.Services.CEPs;
 using Wio.LabConsult.Application.Mappings;
 
 namespace Wio.LabConsult.Application;
@@ -24,6 +25,7 @@ public static class ApplicationServiceRegistration
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         services.AddServiceEmail(configuration);
+        services.AddTransient<CepService>();
       
         return services;
     }

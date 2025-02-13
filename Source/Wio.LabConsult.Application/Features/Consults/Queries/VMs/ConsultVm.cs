@@ -29,6 +29,8 @@ public class ConsultVm
     public virtual ICollection<ReviewVm>? Reviews { get; set; }
     public virtual ICollection<ImageVm>? Images { get; set; }
 
+    public ClinicAddress? Address { get; set; }
+
     public string StatusLabel
     {
         get

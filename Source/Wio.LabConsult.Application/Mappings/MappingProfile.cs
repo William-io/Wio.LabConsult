@@ -20,7 +20,9 @@ public class MappingProfile : Profile
         // CreateMap<Source, Destination>();
         CreateMap<Consult, ConsultVm>()
             .ForMember(d => d.CategoryName, opt => opt.MapFrom(s => s.Category!.Name))
-            .ForMember(d => d.NumberReviews, opt => opt.MapFrom(s => s.Reviews == null ? 0 : s.Reviews.Count));
+            .ForMember(d => d.NumberReviews, opt => opt.MapFrom(s => s.Reviews == null ? 0 : s.Reviews.Count))
+            .ForMember(dest => dest.Address!, opt => opt.MapFrom(src => src.Address!));
+
 
         CreateMap<Image, ImageVm>();
         CreateMap<Review, ReviewVm>();

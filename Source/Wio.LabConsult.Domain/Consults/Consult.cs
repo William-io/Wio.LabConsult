@@ -24,4 +24,6 @@ public class Consult : Entity
     public Category? Category { get; set; }
     public virtual ICollection<Review>? Reviews { get; set; }
     public virtual ICollection<Image>? Images { get; set; }
+    //public string? Local { get; set; }
+    public ClinicAddress? Address { get; set; }
 }
