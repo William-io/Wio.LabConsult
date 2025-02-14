@@ -1,11 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Wio.LabConsult.Domain.Abstractions;
-using Wio.LabConsult.Domain.Requests;
 
-namespace Wio.LabConsult.Domain.Orders;
+namespace Wio.LabConsult.Domain.Requests;
 
 public class Request : Entity
 {
+    public Request() { }
+    public Request(
+        string? patientName,
+        string? patientUserName,
+        RequestConfirmation requestConfirmation,
+        decimal subTotal,
+        decimal total,
+        decimal rate,
+        decimal priceWithoutPlan)
+    {
+        PatientName = patientName;
+        PatientUserName = patientUserName;
+        RequestConfirmation = requestConfirmation;
+        SubTotal = subTotal;
+        Total = total;
+        Rate = rate;
+        PriceWithoutPlan = priceWithoutPlan;
+    }
+
     public string? PatientName { get; set; }
     public string? PatientUserName { get; set; }
     public RequestConfirmation? RequestConfirmation { get; set; }
@@ -17,12 +35,14 @@ public class Request : Entity
     public decimal Total { get; set; }
 
     public string? PaymentIntentId { get; set; }
+
+    //STRIPE
     public string? ClientSecret { get; set; }
     public string? StripeApiKey { get; set; }
 
-    //[Column(TypeName = "decimal(10,2)")]
-    //public decimal Tax { get; set; }
+    [Column(TypeName = "decimal(10,2)")]
+    public decimal Rate { get; set; }
 
-    //[Column(TypeName = "decimal(10,2)")]
-    //public decimal PriceDiscount { get; set; }
+    [Column(TypeName = "decimal(10,2)")]
+    public decimal PriceWithoutPlan { get; set; }
 }

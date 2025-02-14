@@ -4,7 +4,7 @@ using Wio.LabConsult.Domain.Abstractions;
 using Wio.LabConsult.Domain.Appointments;
 using Wio.LabConsult.Domain.Categories;
 using Wio.LabConsult.Domain.Consults;
-using Wio.LabConsult.Domain.Orders;
+using Wio.LabConsult.Domain.Requests;
 using Wio.LabConsult.Domain.Requests;
 using Wio.LabConsult.Domain.Reviews;
 using Wio.LabConsult.Domain.Shared;

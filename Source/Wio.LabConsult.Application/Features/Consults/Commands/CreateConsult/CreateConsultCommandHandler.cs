@@ -28,6 +28,7 @@ public class CreateConsultCommandHandler : IRequestHandler<CreateConsultCommand,
         //Verificação e converter CEP para endereço
         if(_cepService.IsCep(request.Local) && request.Local is not null)
         {
+            //No front input apenas de CEP
             var address = await _cepService.GetAddressFromCepAsync(request.Local);
 
             if(address is not null)

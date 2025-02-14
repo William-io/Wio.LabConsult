@@ -4,12 +4,15 @@ namespace Wio.LabConsult.Domain.Requests;
 
 public enum RequestStatus
 {
-    [EnumMember(Value = "Pendente")] 
+    [EnumMember(Value = "Pendente")]
     Pending,
-    [EnumMember(Value = "Pagamento recebido")] 
-    Approved,
-    [EnumMember(Value = "Agendado")] 
-    Completed,
-    [EnumMember(Value = "Pagagamento rejeitado")] 
-    Rejected
+    [EnumMember(Value = "Agendado")]
+    Scheduled,
+    [EnumMember(Value = "Confirmado")]
+    Confirmed,
+    [EnumMember(Value = "Cancelado")]
+    Canceled,
+    [EnumMember(Value = "Erro no pagamento")]
+    Error
+    //FALTA IMPLEMENTAR FALTOU E REMARCAR
 }

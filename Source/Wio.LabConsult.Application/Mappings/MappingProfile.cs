@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Wio.LabConsult.Application.Features.Addresses.Vms;
+using Wio.LabConsult.Application.Features.Appointments.VMs;
 using Wio.LabConsult.Application.Features.Categories.VMs;
 using Wio.LabConsult.Application.Features.Consults.Commands.CreateConsult;
 using Wio.LabConsult.Application.Features.Consults.Commands.UpdateConsult;
@@ -6,8 +8,10 @@ using Wio.LabConsult.Application.Features.Consults.Queries.VMs;
 using Wio.LabConsult.Application.Features.Countries.VMs;
 using Wio.LabConsult.Application.Features.Images.Queries.Vms;
 using Wio.LabConsult.Application.Features.Reviews.Queries.Vms;
+using Wio.LabConsult.Domain.Appointments;
 using Wio.LabConsult.Domain.Categories;
 using Wio.LabConsult.Domain.Consults;
+using Wio.LabConsult.Domain.Requests;
 using Wio.LabConsult.Domain.Reviews;
 using Wio.LabConsult.Domain.Shared;
 
@@ -31,5 +35,15 @@ public class MappingProfile : Profile
         CreateMap<CreateConsultCommand, Consult>();
         CreateMap<CreateConsultImageCommand, Image>();
         CreateMap<UpdateConsultCommand, Consult>();
+        CreateMap<Appointment, AppointmentVm>().ForMember(c => c.AppointmenttId, x => x.MapFrom(a => a.AppointmentCartMasterId)); 
+        CreateMap<AppointmentItem, AppointmentItemVm>();
+        CreateMap<AppointmentItemVm, AppointmentItem>();
+        CreateMap<Address, AddressVm>();
+
+
+        CreateMap<Appointment, AppointmentVm>();
+        CreateMap<AppointmentItem, AppointmentItemVm>();
+        CreateMap<RequestConfirmation, AddressVm>();
+
     }
 }

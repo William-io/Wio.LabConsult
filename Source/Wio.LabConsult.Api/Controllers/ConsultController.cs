@@ -128,7 +128,7 @@ public class ConsultController : ControllerBase
 
     //Não vai deletar apenas atualizar o status de uma consulta ativa para inativa
     [Authorize(Roles = Role.ADMIN)]
-    [HttpDelete("status/{id}", Name = "UpdateStatusProduct")]
+    [HttpDelete("status/{id}", Name = "UpdateStatusConsult")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<ActionResult<ConsultVm>> UpdateStatusConsult(int id)
     {

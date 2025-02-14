@@ -2,7 +2,7 @@
 using Wio.LabConsult.Domain.Abstractions;
 using Wio.LabConsult.Domain.Consults;
 
-namespace Wio.LabConsult.Domain.Orders;
+namespace Wio.LabConsult.Domain.Requests;
 
 public class RequestItem : Entity
 {

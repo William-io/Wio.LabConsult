@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wio.LabConsult.Application.Contracts.Identity;
 using Wio.LabConsult.Application.Contracts.Services;
 using Wio.LabConsult.Application.Models.ImageManagement;
+using Wio.LabConsult.Application.Models.Payment;
 using Wio.LabConsult.Application.Models.Token;
 using Wio.LabConsult.Application.Persistence;
 using Wio.LabConsult.Infrastructure.MessageImplementation;
@@ -17,11 +18,13 @@ public static class InfrastructureServiceRegistration
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+
         services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<IAuthService, AuthService>();
 
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+        services.Configure<StripeSettings>(configuration.GetSection("StripeSettings"));
 
         return services;
     }

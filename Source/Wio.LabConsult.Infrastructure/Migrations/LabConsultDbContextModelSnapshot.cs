@@ -164,7 +164,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("AppointmentMasterId")
+                    b.Property<Guid?>("AppointmentCartMasterId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
@@ -320,7 +320,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.ToTable("Consults");
                 });
 
-            modelBuilder.Entity("Wio.LabConsult.Domain.Orders.Request", b =>
+            modelBuilder.Entity("Wio.LabConsult.Domain.Requests.Request", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -352,6 +352,12 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("PriceWithoutPlan")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -370,7 +376,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.ToTable("Requests");
                 });
 
-            modelBuilder.Entity("Wio.LabConsult.Domain.Orders.RequestItem", b =>
+            modelBuilder.Entity("Wio.LabConsult.Domain.Requests.RequestItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,11 +420,16 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RequestId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ConsultId");
 
                     b.HasIndex("RequestId");
+
+                    b.HasIndex("RequestId1");
 
                     b.ToTable("RequestsItems");
                 });
@@ -476,17 +487,26 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Cpf")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -760,7 +780,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Wio.LabConsult.Domain.Orders.Request", b =>
+            modelBuilder.Entity("Wio.LabConsult.Domain.Requests.Request", b =>
                 {
                     b.OwnsOne("Wio.LabConsult.Domain.Requests.RequestConfirmation", "RequestConfirmation", b1 =>
                         {
@@ -791,6 +811,9 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                             b1.Property<string>("Phone")
                                 .HasColumnType("nvarchar(max)");
 
+                            b1.Property<string>("Username")
+                                .HasColumnType("nvarchar(max)");
+
                             b1.HasKey("RequestId");
 
                             b1.ToTable("RequestConfirmations");
@@ -802,7 +825,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Navigation("RequestConfirmation");
                 });
 
-            modelBuilder.Entity("Wio.LabConsult.Domain.Orders.RequestItem", b =>
+            modelBuilder.Entity("Wio.LabConsult.Domain.Requests.RequestItem", b =>
                 {
                     b.HasOne("Wio.LabConsult.Domain.Consults.Consult", "Consult")
                         .WithMany()
@@ -810,11 +833,15 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wio.LabConsult.Domain.Orders.Request", "Request")
+                    b.HasOne("Wio.LabConsult.Domain.Requests.Request", null)
                         .WithMany("RequestItems")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Wio.LabConsult.Domain.Requests.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId1");
 
                     b.Navigation("Consult");
 
@@ -860,7 +887,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("Wio.LabConsult.Domain.Orders.Request", b =>
+            modelBuilder.Entity("Wio.LabConsult.Domain.Requests.Request", b =>
                 {
                     b.Navigation("RequestItems");
                 });

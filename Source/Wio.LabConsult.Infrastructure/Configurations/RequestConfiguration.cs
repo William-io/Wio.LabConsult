@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wio.LabConsult.Domain.Orders;
 using Wio.LabConsult.Domain.Requests;
 
 namespace Wio.LabConsult.Infrastructure.Configurations;
@@ -16,6 +15,7 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
 
         builder.HasMany(req => req.RequestItems)
             .WithOne()
+            .HasForeignKey(ri => ri.RequestId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(req => req.Status).HasConversion(

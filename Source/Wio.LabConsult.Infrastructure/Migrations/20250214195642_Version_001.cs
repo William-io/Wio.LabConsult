@@ -23,6 +23,9 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -39,7 +42,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AppointmentMasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AppointmentCartMasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -144,6 +147,8 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StripeApiKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rate = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    PriceWithoutPlan = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -331,6 +336,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 columns: table => new
                 {
                     RequestId = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -387,6 +393,7 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateRequest = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestId = table.Column<int>(type: "int", nullable: false),
+                    RequestId1 = table.Column<int>(type: "int", nullable: true),
                     ConsultItemId = table.Column<int>(type: "int", nullable: false),
                     ConsultName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -410,6 +417,11 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                         principalTable: "Requests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RequestsItems_Requests_RequestId1",
+                        column: x => x.RequestId1,
+                        principalTable: "Requests",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -501,6 +513,11 @@ namespace Wio.LabConsult.Infrastructure.Migrations
                 name: "IX_RequestsItems_RequestId",
                 table: "RequestsItems",
                 column: "RequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestsItems_RequestId1",
+                table: "RequestsItems",
+                column: "RequestId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ConsultId",
