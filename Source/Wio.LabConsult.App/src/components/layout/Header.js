@@ -9,6 +9,7 @@ const Header = () => {
             <div className="col-12 col-md-3">
                 <div className="navbar-brand">
                     {/* <img src="/images/logo.png" /> */}
+                    <span className="navbar-brand-text">Lab.Consultas</span>
                 </div>
             </div>
             <div className="col-12 col-md-6 mt-2 mt-md-0">
@@ -24,9 +25,13 @@ const Header = () => {
                             <i className="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div> */}
-                </div>
-            </div>
-            
+                      <h2>
+                          <span className="gradient-text">Economize até 50% </span>
+                          <span>adquira o plano!</span>
+                      </h2>
+                  </div>
+              </div>
+
             <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
                 <button className="btn" id="login_btn">Entrar</button>
                 <span id="cart" className="ml-3">Pedido</span>

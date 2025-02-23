@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react'
 
 const Footer = () => {
-  return (
-      <Fragment>
-          <footer className="py-1">
-              <p className="text-center mt-1">
-                  Ecommerce Amazon - 2023-2025, All Rights Reserved
-              </p>
-          </footer>
-      </Fragment>
-  )
+    return (
+        <Fragment>
+            <footer className="footer-bar py-1">
+                <p className="text-center mt-4">
+                    Lab Consult - 2025, by William.io
+                </p>
+            </footer>
+        </Fragment>
+    )
 }
 
 export default Footer
